@@ -2,6 +2,15 @@ minikube start --driver=docker --image-mirror-country='cn' --registry-mirror=htt
 #docker login --username=hi50091061@aliyun.com registry.cn-beijing.aliyuncs.com
 kubectl.exe expose deployment demo-deployment --port=80 --target-port=8000
 
+#
+#  "registry-mirrors": [
+#    "https://registry.docker-cn.com",
+#    "https://docker.mirrors.ustc.edu.cn",
+#    "http://hub-mirror.c.163.com",
+#    "https://cr.console.aliyun.com/"
+#  ]
+#
+
 kubectl.exe apply -f nginx-deployment.yaml
 kubectl.exe logs --tail 100 -f deployment/nginx-deployment
 kubectl.exe get deployment/nginx-deployment
