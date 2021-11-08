@@ -1,5 +1,6 @@
 minikube start --driver=docker --image-mirror-country='cn' --registry-mirror=https://registry.docker-cn.com
 #docker login --username=hi50091061@aliyun.com registry.cn-beijing.aliyuncs.com
+#--port=80 对外暴露端口 --target-port=8000 容器内服务端口
 kubectl.exe expose deployment demo-deployment --port=80 --target-port=8000
 
 #
