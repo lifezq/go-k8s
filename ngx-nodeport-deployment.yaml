@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ngxnp-deployment
+  labels:
+    app: ngxnp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ngxnp
+  template:
+    metadata:
+      labels:
+        app: ngxnp
+    spec:
+      containers:
+        - name: ngxnp
+          image: nginx:1.14.2
+          ports:
+            - containerPort: 80
+
+---
+#service
+apiVersion: v1
+kind: Service
+metadata:
+  name: ngxnp
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      nodePort: 30001
+  selector:
+    app: ngxnp
+  type: NodePort

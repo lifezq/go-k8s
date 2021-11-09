@@ -20,3 +20,7 @@ kubectl.exe rollout status deployment/nginx-deployment
 kubectl.exe get deployments
 kubectl.exe get rs
 kubectl.exe get pods --show-labels
+kubectl.exe describe svc ngx
+kubectl.exe get rs -o wide
+kubectl get pods -o wide
+kubectl.exe describe deployment ngx-deployment

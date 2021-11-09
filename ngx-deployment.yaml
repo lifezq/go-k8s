@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ngx-deployment
+  labels:
+    app: ngx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ngx
+  template:
+    metadata:
+      labels:
+        app: ngx
+    spec:
+      containers:
+        - name: ngx
+          image: nginx:1.14.2
+          ports:
+            - containerPort: 80
+
+---
+#service
+apiVersion: v1
+kind: Service
+metadata:
+  name: ngx
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: ngx
+  type: ClusterIP
+
+---
+#ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ngx
+spec:
+  rules:
+    - host: k8s-web.ngx.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            #            pathType: Exact
+            backend:
+              service:
+                name: ngx
+                port:
+                  number: 80
